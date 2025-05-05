@@ -36,7 +36,7 @@ const ShortenForm = () => {
         activeEndHour: '' 
       });
       setShowSuccess(true);
-      setTimeout(() => setShowSuccess(false), 3000);
+      setTimeout(() => setShowSuccess(false), 1000);
     } catch (error) {
       console.error('Error creating short URL:', error);
     }

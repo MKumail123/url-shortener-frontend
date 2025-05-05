@@ -8,9 +8,9 @@ const LinkItem = ({ link }) => {
   const [showQR, setShowQR] = useState(false);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(link.shortUrl);
+    navigator.clipboard.writeText(link.displayShortUrl); // Use displayShortUrl
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setTimeout(() => setCopied(false), 1000);
   };
 
   return (
@@ -25,7 +25,7 @@ const LinkItem = ({ link }) => {
               className="text-gray-700 hover:text-blue-600 cursor-pointer truncate"
               onClick={handleCopy}
             >
-              {link.shortUrl}
+              {link.displayShortUrl} {/* Use displayShortUrl */}
             </span>
             <button 
               onClick={handleCopy}
