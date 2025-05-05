@@ -35,7 +35,9 @@ const useUrlStore = create((set, get) => ({
     set({ isLoading: true, error: null });
     try {
       const links = await urlService.getUserLinks();
-      set({ userLinks: links, isLoading: false });
+      console.log("links: ", links.data);
+      
+      set({ userLinks: links.data, isLoading: false });
       return links;
     } catch (error) {
       set({ 
