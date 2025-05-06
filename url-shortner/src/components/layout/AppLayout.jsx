@@ -9,7 +9,7 @@ const AppLayout = () => {
       <main className="">
         <Outlet />
       </main>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };

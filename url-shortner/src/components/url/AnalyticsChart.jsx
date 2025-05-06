@@ -52,7 +52,7 @@ const AnalyticsChart = ({ data, chartType }) => {
   if (chartType === 'location') {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-white p-4 rounded-lg border border-gray-200">
+        <div className="bg-[#111827] p-6 rounded-xl border border-blue-900/30">
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie
@@ -69,28 +69,47 @@ const AnalyticsChart = ({ data, chartType }) => {
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
-              <Tooltip formatter={(value) => [`${value} clicks`, 'Clicks']} />
-              <Legend />
+              <Tooltip 
+                formatter={(value) => [`${value} clicks`, 'Clicks']}
+                contentStyle={{ background: '#1A1F2C', border: 'none', borderRadius: '0.5rem' }}
+                itemStyle={{ color: '#93C5FD' }}
+                labelStyle={{ color: '#E5E7EB' }}
+              />
+              <Legend 
+                formatter={(value) => <span className="text-gray-300">{value}</span>}
+              />
             </PieChart>
           </ResponsiveContainer>
         </div>
         
-        <div className="bg-white p-4 rounded-lg border border-gray-200">
-          <div className="max-h-[300px] overflow-y-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50 sticky top-0">
+        <div className="bg-[#111827] p-6 rounded-xl border border-blue-900/30">
+          <div className="max-h-[300px] overflow-y-auto custom-scrollbar">
+            <table className="min-w-full divide-y divide-blue-900/30">
+              <thead className="bg-[#1A1F2C] sticky top-0">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Location</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Clicks</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Percentage</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                    Location
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                    Clicks
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                    Percentage
+                  </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="divide-y divide-blue-900/30">
                 {chartData.map((item, index) => (
-                  <tr key={index}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item.name}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{item.value}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{item.percent}%</td>
+                  <tr key={index} className="hover:bg-[#1E2330] transition-colors duration-150">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-200">
+                      {item.name}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-blue-400">
+                      {item.value}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
+                      {item.percent}%
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -103,22 +122,42 @@ const AnalyticsChart = ({ data, chartType }) => {
 
   // Time chart
   return (
-    <div className="bg-white p-4 rounded-lg border border-gray-200">
+    <div className="bg-[#111827] p-6 rounded-xl border border-blue-900/30">
       <ResponsiveContainer width="100%" height={400}>
-        <BarChart
-          data={chartData}
-          margin={{
-            top: 20,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="hour" />
-          <YAxis />
-          <Tooltip formatter={(value) => [`${value} clicks`, 'Clicks']} />
-          <Bar dataKey="clicks" fill="#3B82F6" barSize={40} />
+        <BarChart data={chartData}>
+          <CartesianGrid strokeDasharray="3 3" stroke="#1E2330" />
+          <XAxis 
+            dataKey="hour" 
+            stroke="#94A3B8"
+            tick={{ fill: '#94A3B8' }}
+          />
+          <YAxis 
+            stroke="#94A3B8"
+            tick={{ fill: '#94A3B8' }}
+          />
+          <Tooltip
+            contentStyle={{ 
+              background: '#1A1F2C', 
+              border: '1px solid rgba(59, 130, 246, 0.3)',
+              borderRadius: '0.5rem'
+            }}
+            itemStyle={{ color: '#93C5FD' }}
+            labelStyle={{ color: '#E5E7EB' }}
+          />
+          <Bar 
+            dataKey="clicks" 
+            fill="#3B82F6"
+            radius={[4, 4, 0, 0]}
+          >
+            {chartData.map((entry, index) => (
+              <Cell 
+                key={`cell-${index}`}
+                fill="#3B82F6"
+                fillOpacity={0.8}
+                className="hover:fill-opacity-100 transition-all duration-200"
+              />
+            ))}
+          </Bar>
         </BarChart>
       </ResponsiveContainer>
     </div>
