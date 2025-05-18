@@ -1,4 +1,3 @@
-// src/services/authService.js
 import api from './api';
 
 export const authService = {
@@ -9,6 +8,12 @@ export const authService = {
   
   login: async (credentials) => {
     const response = await api.post('/user/login', credentials);
+    return response.data;
+  },
+
+  googleLogin: async (googleData) => {
+    const response = await api.post('/user/google-login', googleData);
+    console.log('Google login response:', response);
     return response.data;
   },
   

@@ -1,4 +1,3 @@
-// src/services/urlService.js
 import api from './api';
 
 export const urlService = {
@@ -16,6 +15,7 @@ export const urlService = {
   
   getAnalytics: async (shortCode) => {
     const response = await api.get(`/urlshortener/analytics/${shortCode}`);
-    return response.data;
+    console.log('Get Analytics response:', response.data);
+    return response.data.data;
   }
 };

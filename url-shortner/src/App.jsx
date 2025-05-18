@@ -43,7 +43,7 @@ const App = () => {
   }
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="">
       <Routes>
         <Route element={<AppLayout />}>
           <Route path="/" element={<HomePage />} />

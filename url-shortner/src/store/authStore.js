@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { authService } from '../services/authService';
-import useUrlStore from '../store/urlStore';
+import useUrlStore from './urlStore';
 
 const useAuthStore = create(
   persist(
@@ -82,6 +82,54 @@ const useAuthStore = create(
           throw error;
         }
       },
+      googleLogin: async (credential) => {
+        set({ isLoading: true, error: null });
+        try {
+          // Decode the Google credential to extract email and sub (Google ID)
+          const payload = JSON.parse(atob(credential.split('.')[1]));
+          const googleId = payload.sub;
+          const email = payload.email;
+
+          const response = await fetch('https://localhost:44320/api/User/google-login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, googleId }), // Send email and googleId to match GoogleLoginDto
+            credentials: 'include', // Enable credentials for cookie support
+          });
+          const data = await response.json();
+          console.log(data)
+          if (data.success) {
+            set({ 
+              user: { id: data.data.id, email: data.data.email }, // Adjust based on your API response structure
+              accessToken: data.data.accessToken,
+              isAuthenticated: true,
+              isLoading: false,
+              hasCheckedAuth: true,
+            });
+            localStorage.setItem('accessToken', data.data.accessToken);
+            try {
+              await useUrlStore.getState().getUserLinks();
+            } catch (fetchError) {
+              console.error('Failed to fetch links after Google login:', fetchError);
+            }
+            // Note: navigate('/dashboard') is handled in the component
+          } else {
+            set({ 
+              error: data.Message || 'Google login failed',
+              isLoading: false,
+              hasCheckedAuth: true,
+            });
+            throw new Error(data.Message || 'Google login failed');
+          }
+        } catch (error) {
+          set({ 
+            error: error.message || 'Network error',
+            isLoading: false,
+            hasCheckedAuth: true,
+          });
+          throw error;
+        }
+      },
       
       logout: async () => {
         set({ isLoading: true });
@@ -112,12 +160,10 @@ const useAuthStore = create(
         const token = localStorage.getItem('accessToken');
         if (token) {
           try {
-            // Validate the token by fetching user links
             await useUrlStore.getState().getUserLinks();
             set({ accessToken: token, isAuthenticated: true, hasCheckedAuth: true, isLoading: false });
           } catch (error) {
             console.error('Token validation failed:', error);
-            // If token is invalid, log the user out
             set({ 
               user: null,
               accessToken: null,

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import useAuthStore from '../store/authStore';
 
-const API_URL = 'https://localhost:44320/api';
+const API_URL = 'http://minifyurl.runasp.net/api';
 
 const api = axios.create({
   baseURL: API_URL,

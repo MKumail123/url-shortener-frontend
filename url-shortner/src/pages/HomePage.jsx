@@ -6,186 +6,163 @@ const HomePage = () => {
   const { isAuthenticated } = useAuthStore();
 
   return (
-    <div>
-      <section className="py-10 md:py-16">
-        <div className="container mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Shorten, Share, and Track Your Links
-          </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Create shorter links, QR codes, and track detailed analytics with our powerful URL shortening service.
-          </p>
-          
-          {!isAuthenticated && (
-            <div className="flex flex-col sm:flex-row justify-center gap-4 mb-10">
-              <Link
-                to="/register"
-                className="bg-blue-600 text-white py-3 px-6 rounded-md font-medium hover:bg-blue-700 transition"
-              >
-                Create Free Account
-              </Link>
-              <Link
-                to="/login"
-                className="bg-gray-100 text-gray-800 py-3 px-6 rounded-md font-medium hover:bg-gray-200 transition"
-              >
-                Log In
-              </Link>
+    <div className="min-h-screen bg-[#0A0F1C] text-white">
+      {/* Hero Section */}
+      <section className="relative py-20 md:py-32 overflow-hidden">
+        {/* Background Effects */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-transparent to-purple-600/10"></div>
+          <div className="absolute top-0 left-0 w-1/2 h-1/2 bg-gradient-to-br from-blue-500/5 to-transparent blur-3xl"></div>
+          <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-gradient-to-tl from-purple-500/5 to-transparent blur-3xl"></div>
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                Modern URL Shortener
+              </span>
+              <br />
+              <span className="text-gray-200 mt-2 block text-3xl md:text-4xl">
+                Built with Advanced Tech Stack
+              </span>
+            </h1>
+            
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-6 my-12 max-w-3xl mx-auto">
+              {/* Tech Stack Cards */}
+              <div className="col-span-2 md:col-span-1 bg-[#1A1F2C] p-4 rounded-xl border border-blue-900/30 hover:border-blue-500/50 transition-all duration-300">
+                <div className="text-blue-500 text-4xl mb-2">⚛️</div>
+                <div className="text-sm font-medium text-gray-300">React.js</div>
+                <div className="text-xs text-blue-400/80">UI Framework</div>
+              </div>
+              
+              <div className="bg-[#1A1F2C] p-4 rounded-xl border border-blue-900/30 hover:border-blue-500/50 transition-all duration-300">
+                <div className="text-blue-500 text-4xl mb-2">🔄</div>
+                <div className="text-sm font-medium text-gray-300">Axios</div>
+                <div className="text-xs text-blue-400/80">HTTP Client</div>
+              </div>
+              
+              <div className="bg-[#1A1F2C] p-4 rounded-xl border border-blue-900/30 hover:border-blue-500/50 transition-all duration-300">
+                <div className="text-blue-500 text-4xl mb-2">🎨</div>
+                <div className="text-sm font-medium text-gray-300">Tailwind</div>
+                <div className="text-xs text-blue-400/80">Styling</div>
+              </div>
+              
+              <div className="bg-[#1A1F2C] p-4 rounded-xl border border-blue-900/30 hover:border-blue-500/50 transition-all duration-300">
+                <div className="text-blue-500 text-4xl mb-2">📊</div>
+                <div className="text-sm font-medium text-gray-300">D3.js</div>
+                <div className="text-xs text-blue-400/80">Analytics</div>
+              </div>
+
+              <div className="col-span-2 md:col-span-1 bg-[#1A1F2C] p-4 rounded-xl border border-blue-900/30 hover:border-blue-500/50 transition-all duration-300">
+                <div className="text-blue-500 text-4xl mb-2">🔐</div>
+                <div className="text-sm font-medium text-gray-300">JWT</div>
+                <div className="text-xs text-blue-400/80">Auth</div>
+              </div>
             </div>
-          )}
+
+            {!isAuthenticated && (
+              <div className="flex flex-col sm:flex-row justify-center gap-4 mt-12">
+                <Link
+                  to="/register"
+                  className="bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 px-8 rounded-lg font-medium 
+                    hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg shadow-blue-500/25"
+                >
+                  Get Started
+                </Link>
+                <Link
+                  to="/login"
+                  className="bg-[#1A1F2C] text-gray-300 py-3 px-8 rounded-lg font-medium border border-blue-900/50
+                    hover:bg-[#1E2330] hover:border-blue-500/50 transition-all duration-300"
+                >
+                  View Demo
+                </Link>
+              </div>
+            )}
+          </div>
         </div>
       </section>
-      
-      {isAuthenticated ? (
-        <section className="py-8">
-          <div className="container mx-auto">
-            <ShortenForm />
+
+      {/* Features Section */}
+      <section className="py-20 bg-[#0D1219]">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-blue-500 bg-clip-text text-transparent">
+              Advanced Features
+            </h2>
+            <p className="text-gray-400 mt-4">Modern tools for modern developers</p>
           </div>
-        </section>
-      ) : (
-        <>
-          <section className="py-12 bg-gray-50">
-            <div className="container mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="bg-white p-6 rounded-lg shadow-sm text-center">
-                  <div className="bg-blue-100 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">Easy Link Shortening</h3>
-                  <p className="text-gray-600">
-                    Transform long URLs into short, easy-to-share links with just a few clicks.
-                  </p>
-                </div>
-                
-                <div className="bg-white p-6 rounded-lg shadow-sm text-center">
-                  <div className="bg-blue-100 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">QR Code Generation</h3>
-                  <p className="text-gray-600">
-                    Automatically generate QR codes for your shortened links for easy mobile access.
-                  </p>
-                </div>
-                
-                <div className="bg-white p-6 rounded-lg shadow-sm text-center">
-                  <div className="bg-blue-100 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">Detailed Analytics</h3>
-                  <p className="text-gray-600">
-                    Track clicks, locations, and visitor behavior with comprehensive analytics.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
 
-          <section className="py-12">
-            <div className="container mx-auto">
-              <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-                How It Works
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="text-center">
-                  <div className="text-5xl font-bold text-blue-600 mb-4">01</div>
-                  <h3 className="text-xl font-semibold mb-2">Paste Your URL</h3>
-                  <p className="text-gray-600">
-                    Enter the long URL you want to shorten and customize it if needed.
-                  </p>
-                </div>
-                <div className="text-center">
-                  <div className="text-5xl font-bold text-blue-600 mb-4">02</div>
-                  <h3 className="text-xl font-semibold mb-2">Shorten & Share</h3>
-                  <p className="text-gray-600">
-                    Get a shortened link and QR code, ready to share anywhere.
-                  </p>
-                </div>
-                <div className="text-center">
-                  <div className="text-5xl font-bold text-blue-600 mb-4">03</div>
-                  <h3 className="text-xl font-semibold mb-2">Track Analytics</h3>
-                  <p className="text-gray-600">
-                    Monitor clicks, locations, and times with detailed insights.
-                  </p>
-                </div>
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {/* Feature Cards */}
+            <div className="bg-[#1A1F2C] p-6 rounded-xl border border-blue-900/30 hover:border-blue-500/50 transition-all duration-300">
+              <div className="text-blue-500 text-xl mb-4">🔗</div>
+              <h3 className="text-lg font-semibold text-gray-200 mb-2">Smart Routing</h3>
+              <p className="text-gray-400 text-sm">Intelligent URL routing with custom aliases and path management</p>
             </div>
-          </section>
 
-          <section className="py-12 bg-gray-50">
-            <div className="container mx-auto">
-              <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-                What Our Users Say
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="bg-white p-6 rounded-lg shadow-sm">
-                  <div className="flex items-center mb-4">
-                    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold">
-                      JD
-                    </div>
-                    <div className="ml-4">
-                      <h4 className="font-semibold text-gray-800">John Doe</h4>
-                      <p className="text-gray-500 text-sm">Marketing Manager</p>
-                    </div>
-                  </div>
-                  <p className="text-gray-600">
-                    "This tool has made sharing links so much easier! The analytics feature helps me understand my audience better."
-                  </p>
-                </div>
-                <div className="bg-white p-6 rounded-lg shadow-sm">
-                  <div className="flex items-center mb-4">
-                    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold">
-                      JS
-                    </div>
-                    <div className="ml-4">
-                      <h4 className="font-semibold text-gray-800">Jane Smith</h4>
-                      <p className="text-gray-500 text-sm">Freelance Designer</p>
-                    </div>
-                  </div>
-                  <p className="text-gray-600">
-                    "I love the QR code feature! It’s perfect for my business cards and posters."
-                  </p>
-                </div>
-                <div className="bg-white p-6 rounded-lg shadow-sm">
-                  <div className="flex items-center mb-4">
-                    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold">
-                      MK
-                    </div>
-                    <div className="ml-4">
-                      <h4 className="font-semibold text-gray-800">Mike Khan</h4>
-                      <p className="text-gray-500 text-sm">Small Business Owner</p>
-                    </div>
-                  </div>
-                  <p className="text-gray-600">
-                    "The ability to set active hours for my links has been a game-changer for my campaigns."
-                  </p>
-                </div>
-              </div>
+            <div className="bg-[#1A1F2C] p-6 rounded-xl border border-blue-900/30 hover:border-blue-500/50 transition-all duration-300">
+              <div className="text-blue-500 text-xl mb-4">📊</div>
+              <h3 className="text-lg font-semibold text-gray-200 mb-2">Real-time Analytics</h3>
+              <p className="text-gray-400 text-sm">Comprehensive click tracking and visitor insights</p>
             </div>
-          </section>
 
-          <section className="py-12 bg-blue-600 text-white">
-            <div className="container mx-auto text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Ready to Get Started?
-              </h2>
-              <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
-                Join thousands of users who trust our service to shorten and track their links effortlessly.
-              </p>
-              <Link
-                to="/register"
-                className="bg-white text-blue-600 py-3 px-8 rounded-md font-medium hover:bg-gray-100 transition"
-              >
-                Sign Up Now
-              </Link>
+            <div className="bg-[#1A1F2C] p-6 rounded-xl border border-blue-900/30 hover:border-blue-500/50 transition-all duration-300">
+              <div className="text-blue-500 text-xl mb-4">🔒</div>
+              <h3 className="text-lg font-semibold text-gray-200 mb-2">Secure Access</h3>
+              <p className="text-gray-400 text-sm">JWT-based authentication and role-based access control</p>
             </div>
-          </section>
-        </>
-      )}
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-20 bg-[#0A0F1C]">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto text-center">
+            <div className="bg-[#1A1F2C] p-6 rounded-xl border border-blue-900/30">
+              <div className="text-3xl font-bold text-blue-500 mb-2">99.9%</div>
+              <div className="text-gray-400 text-sm">Uptime</div>
+            </div>
+            <div className="bg-[#1A1F2C] p-6 rounded-xl border border-blue-900/30">
+              <div className="text-3xl font-bold text-blue-500 mb-2">50ms</div>
+              <div className="text-gray-400 text-sm">Response Time</div>
+            </div>
+            <div className="bg-[#1A1F2C] p-6 rounded-xl border border-blue-900/30">
+              <div className="text-3xl font-bold text-blue-500 mb-2">2M+</div>
+              <div className="text-gray-400 text-sm">API Requests</div>
+            </div>
+            <div className="bg-[#1A1F2C] p-6 rounded-xl border border-blue-900/30">
+              <div className="text-3xl font-bold text-blue-500 mb-2">500K+</div>
+              <div className="text-gray-400 text-sm">Active Users</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-r from-blue-600/20 to-blue-900/20">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold text-gray-200 mb-8">
+            Ready to Get Started?
+          </h2>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Link
+              to="/register"
+              className="bg-blue-500 hover:bg-blue-600 text-white py-3 px-8 rounded-lg font-medium transition-all duration-300"
+            >
+              Create Account
+            </Link>
+            <Link
+              to="/docs"
+              className="bg-[#1A1F2C] text-gray-300 py-3 px-8 rounded-lg font-medium border border-blue-900/50
+                hover:bg-[#1E2330] hover:border-blue-500/50 transition-all duration-300"
+            >
+              View Documentation
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
